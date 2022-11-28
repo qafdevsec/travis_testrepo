@@ -6,8 +6,8 @@ service:
 jobs:
   include:
     – stage: SAST
-    before_install:
-      - docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
-    script:
-      - env | grep -E "TRAVIS|TRAVIS_BUILD_ID|TRAVIS_BRANCH|TRAVIS_COMMIT" > /tmp/env
-      - docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+before_install:
+  - docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+script:
+  - env | grep -E "TRAVIS|TRAVIS_BUILD_ID|TRAVIS_BRANCH|TRAVIS_COMMIT" > /tmp/env
+  - docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
